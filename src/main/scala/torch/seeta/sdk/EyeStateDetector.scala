@@ -1,0 +1,57 @@
+package torch.seeta.sdk
+
+/**
+ * 眼睛状态估计器
+ *
+ *
+ */
+object EyeStateDetector {
+  final class EYE_STATE {}
+}
+
+class EyeStateDetector @throws[Exception]
+(setting: SeetaModelSetting) {
+  this.construct(setting)
+  //    static{
+  //        System.loadLibrary("SeetaEyeStateDetector200_java");
+  //    }
+  var impl = 0
+
+  @native
+  @throws[Exception]
+  private def construct(setting: SeetaModelSetting): Unit
+
+  @native def dispose(): Unit
+
+  @throws[Throwable]
+  override protected def finalize(): Unit = {
+    super.finalize()
+    this.dispose()
+  }
+
+  /**
+   * 眼睛状态
+   *
+   * @param imageData
+   * @param points
+   * @return EYE_STATE[]
+   */
+  //    public void Detect(SeetaImageData imageData, SeetaPointF[] points, EYE_STATE[] eyeStatus) {
+  //        if (eyeStatus.length < 2) return;
+  //
+  //        int[] eyeStateIndexs = new int[2];
+  //        DetectCore(imageData, points, eyeStateIndexs);
+  //        eyeStatus[0] = EYE_STATE.values()[eyeStateIndexs[0]];
+  //        eyeStatus[1] = EYE_STATE.values()[eyeStateIndexs[1]];
+  //    }
+  def detect(imageData: SeetaImageData, points: Array[SeetaPointF]): Array[EyeStateDetector.EYE_STATE] = {
+    val eyeStatus = new Array[EyeStateDetector.EYE_STATE](2)
+    val eyeStateIndexs = new Array[Int](2)
+    DetectCore(imageData, points, eyeStateIndexs)
+    eyeStatus(0) = EyeStateDetector.EYE_STATE.values(eyeStateIndexs(0))
+    eyeStatus(1) = EyeStateDetector.EYE_STATE.values(eyeStateIndexs(1))
+    eyeStatus
+  }
+
+  @native private def DetectCore(imageData: SeetaImageData, points: Array[SeetaPointF], eyeStateIndexs: Array[Int]): Unit
+}
