@@ -22,10 +22,10 @@ class GenderPredictorProxy  {
       case e: Exception =>
         e.printStackTrace()
     } finally if (genderPredictor != null) pool.returnObject(genderPredictor)
-    new GenderPredictorProxy#GenderItem(gender(0), result)
+    new GenderItem(gender(0), result) //GenderPredictorProxy#
   }
 
-  class GenderItem(private var gender: GenderPredictor.GENDER, private var result: Boolean) {
+  class GenderItem( var gender: GenderPredictor.GENDER,  var result: Boolean) {
     def getGender: GenderPredictor.GENDER = gender
 
     def setGender(gender: GenderPredictor.GENDER): Unit = {

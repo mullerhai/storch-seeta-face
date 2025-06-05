@@ -54,9 +54,9 @@ class FaceRecognizerProxy  {
   }
 
   def cosineSimilarity(leftVector: Array[Float], rightVector: Array[Float]): Float = {
-    var dotProduct = 0
+    var dotProduct = 0f
     for (i <- 0 until leftVector.length) {
-      dotProduct += leftVector(i) * rightVector(i)
+      dotProduct = leftVector(i) * rightVector(i) + dotProduct
     }
     var d1 = 0.0d
     for (value <- leftVector) {

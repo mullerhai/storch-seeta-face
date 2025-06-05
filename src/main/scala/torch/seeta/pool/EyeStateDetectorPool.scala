@@ -2,9 +2,8 @@ package torch.seeta.pool
 
 import org.apache.commons.pool2.PooledObject
 import org.apache.commons.pool2.PooledObjectFactory
-import org.apache.commons.pool2.impl.DefaultPooledObject
-import org.apache.commons.pool2.impl.GenericObjectPool
-import torch.seeta.sdk.EyeStateDetector
+import org.apache.commons.pool2.impl.{DefaultPooledObject, GenericObjectPool, GenericObjectPoolConfig}
+import torch.seeta.sdk.{AgePredictor, EyeStateDetector}
 
 class EyeStateDetectorPool(config: SeetaConfSetting)  extends GenericObjectPool[EyeStateDetector](new PooledObjectFactory[EyeStateDetector]() {
 
@@ -27,7 +26,7 @@ class EyeStateDetectorPool(config: SeetaConfSetting)  extends GenericObjectPool[
      */
     @throws[Exception]
     override def makeObject: PooledObject[EyeStateDetector] = {
-      val detector = new EyeStateDetector(config.getSeetaModelSetting[D][D])
+      val detector = new EyeStateDetector(config.getSeetaModelSetting)
       new DefaultPooledObject[EyeStateDetector](detector)
     }
 
@@ -72,5 +71,5 @@ class EyeStateDetectorPool(config: SeetaConfSetting)  extends GenericObjectPool[
 
       //nothing
     }
-  }, config) {
+  }, config.asInstanceOf[GenericObjectPoolConfig[EyeStateDetector]]) {
 }

@@ -19,7 +19,7 @@ object EyeStateDetector {
 }
 
 @throws[Exception]
-class EyeStateDetector[D](setting: SeetaModelSetting[D]) {
+class EyeStateDetector(setting: SeetaModelSetting) {
   this.construct(setting)
   //    static{
   //        System.loadLibrary("SeetaEyeStateDetector200_java");
@@ -28,7 +28,7 @@ class EyeStateDetector[D](setting: SeetaModelSetting[D]) {
 
   @native
   @throws[Exception]
-  private def construct(setting: SeetaModelSetting[D]): Unit
+  private def construct(setting: SeetaModelSetting): Unit
 
   @native def dispose(): Unit
 

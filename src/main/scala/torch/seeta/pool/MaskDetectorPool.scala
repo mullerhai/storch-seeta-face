@@ -2,9 +2,8 @@ package torch.seeta.pool
 
 import org.apache.commons.pool2.PooledObject
 import org.apache.commons.pool2.PooledObjectFactory
-import org.apache.commons.pool2.impl.DefaultPooledObject
-import org.apache.commons.pool2.impl.GenericObjectPool
-import torch.seeta.sdk.MaskDetector
+import org.apache.commons.pool2.impl.{DefaultPooledObject, GenericObjectPool, GenericObjectPoolConfig}
+import torch.seeta.sdk.{EyeStateDetector, MaskDetector}
 
 class MaskDetectorPool(config: SeetaConfSetting)  extends GenericObjectPool[MaskDetector](new PooledObjectFactory[MaskDetector]() {
 
@@ -27,7 +26,7 @@ class MaskDetectorPool(config: SeetaConfSetting)  extends GenericObjectPool[Mask
      */
     @throws[Exception]
     override def makeObject: PooledObject[MaskDetector] = {
-      val detector = new MaskDetector(config.getSeetaModelSetting[D][D])
+      val detector = new MaskDetector(config.getSeetaModelSetting)
       new DefaultPooledObject[MaskDetector](detector)
     }
 
@@ -72,5 +71,5 @@ class MaskDetectorPool(config: SeetaConfSetting)  extends GenericObjectPool[Mask
 
       //nothing
     }
-  }, config) {
+  }, config.asInstanceOf[GenericObjectPoolConfig[MaskDetector]]) {
 }

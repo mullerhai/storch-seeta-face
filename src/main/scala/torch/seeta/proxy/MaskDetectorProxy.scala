@@ -22,10 +22,10 @@ class MaskDetectorProxy  {
       case e: Exception =>
         e.printStackTrace()
     } finally if (maskDetector != null) pool.returnObject(maskDetector)
-    new MaskDetectorProxy#MaskItem(detect, score(0))
+    new MaskItem(detect, score(0)) //MaskDetectorProxy
   }
 
-  class MaskItem(private var mask: Boolean, private var score: Float) {
+  class MaskItem( var mask: Boolean,  var score: Float) {
     def getScore: Float = score
 
     def setScore(score: Float): Unit = {

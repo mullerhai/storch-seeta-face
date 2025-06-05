@@ -1,6 +1,6 @@
 package torch.seeta.sdk
 
-//import torch.seeta.SeetaModelSetting[D][D];
+//import torch.seeta.SeetaModelSetting;
 
 /**
  * 人脸识别器
@@ -25,13 +25,13 @@ object FaceRecognizer {
 //  }
 }
 
-class FaceRecognizer[D] {
+class FaceRecognizer {
   //    static {
   //        System.loadLibrary("SeetaFaceRecognizer600_java");
   //    }
   var impl = 0
 
-  def this(setting: SeetaModelSetting[D]) ={
+  def this(setting: SeetaModelSetting) ={
     this()
     this.construct(setting)
   }
@@ -41,7 +41,7 @@ class FaceRecognizer[D] {
     this.construct(model, device, id)
   }
 
-  @native private def construct(setting: SeetaModelSetting[D]): Unit
+  @native private def construct(setting: SeetaModelSetting): Unit
 
   @native private def construct(model: String, device: String, id: Int): Unit
 

@@ -25,14 +25,14 @@ object AgePredictor {
 //  }
 }
 
-class AgePredictor[D](setting: SeetaModelSetting[D]) {
+class AgePredictor(setting: SeetaModelSetting) {
   this.construct(setting)
   //    static{
   //        System.loadLibrary("SeetaAgePredictor600_java");
   //    }
   var impl = 0
 
-  @native private def construct(setting: SeetaModelSetting[D]): Unit
+  @native private def construct(setting: SeetaModelSetting): Unit
 
   @native def dispose(): Unit
 

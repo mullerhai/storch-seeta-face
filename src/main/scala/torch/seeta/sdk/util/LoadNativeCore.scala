@@ -1,12 +1,14 @@
 package torch.seeta.sdk.util
 
 import torch.seeta.sdk.SeetaDevice
+
 import scala.jdk.CollectionConverters.*
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
-import java.util.*
+import java.util.Properties
+//import java.util.*
 import java.util.logging.Logger
 import scala.collection.mutable.ListBuffer
 import scala.math.Ordering.comparatorToOrdering
@@ -72,11 +74,11 @@ object LoadNativeCore {
                          */
         
         for (b <- basePath) {
-          fileList.add(copyDLL(b))
+          fileList.append(copyDLL(b))
         }
         
         for (s <- sdkPath) {
-          fileList.add(copyDLL(s))
+          fileList.append(copyDLL(s))
         }
         // 加载 dll文件
         fileList.foreach((file: File) => {
@@ -146,12 +148,20 @@ object LoadNativeCore {
    * @param list
    * @return List<String>
    */
-  private def getSortedPath(list: ListBuffer[DllItem]) =
-    list.sorted(Comparator.comparing((dllItem: DllItem) => {
-    val i = dllItem.getKey.lastIndexOf(".") + 1
-    val substring = dllItem.getKey.substring(i)
-    Integer.valueOf(substring)
-  })).map(DllItem.getValue).collect(Collectors.toList)
+//  private def getSortedPath(list: ListBuffer[DllItem]) =
+//    list.sorted(Comparator.comparing((dllItem: DllItem) => {
+//    val i = dllItem.getKey.lastIndexOf(".") + 1
+//    val substring = dllItem.getKey.substring(i)
+//    Integer.valueOf(substring)
+//  })).map(DllItem.getValue).collect(Collectors.toList)
+
+  private def getSortedPath(list: ListBuffer[DllItem]): List[String] = {
+    list.sorted(Ordering.by[DllItem, Int](dllItem => {
+      val i = dllItem.getKey.lastIndexOf(".") + 1
+      val substring = dllItem.getKey.substring(i)
+      substring.toInt
+    })).map(_.getValue).toList
+  }
 
   /**
    * 复制 resource 中的dll文件到临时目录

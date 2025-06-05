@@ -2,9 +2,8 @@ package torch.seeta.pool
 
 import org.apache.commons.pool2.PooledObject
 import org.apache.commons.pool2.PooledObjectFactory
-import org.apache.commons.pool2.impl.DefaultPooledObject
-import org.apache.commons.pool2.impl.GenericObjectPool
-import torch.seeta.sdk.QualityOfResolution
+import org.apache.commons.pool2.impl.{DefaultPooledObject, GenericObjectPool, GenericObjectPoolConfig}
+import torch.seeta.sdk.{EyeStateDetector, QualityOfResolution}
 
 class QualityOfResolutionPool(config: SeetaConfSetting)  extends GenericObjectPool[QualityOfResolution](
   new PooledObjectFactory[QualityOfResolution]() {
@@ -73,5 +72,5 @@ class QualityOfResolutionPool(config: SeetaConfSetting)  extends GenericObjectPo
 
       //nothing
     }
-  }, config) {
+  }, config.asInstanceOf[GenericObjectPoolConfig[QualityOfResolution]]) {
 }

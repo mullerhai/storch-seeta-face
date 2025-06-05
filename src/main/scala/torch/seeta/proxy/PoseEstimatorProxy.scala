@@ -3,7 +3,7 @@ package torch.seeta.proxy
 import torch.seeta.pool.{PoseEstimatorPool, SeetaConfSetting}
 import torch.seeta.sdk.{PoseEstimator, SeetaImageData, SeetaRect}
 
-class PoseEstimatorProxy[D](confSetting: SeetaConfSetting[D]) {
+class PoseEstimatorProxy(confSetting: SeetaConfSetting) {
   pool = new PoseEstimatorPool(confSetting)
   private var pool: PoseEstimatorPool = null
 
@@ -19,10 +19,10 @@ class PoseEstimatorProxy[D](confSetting: SeetaConfSetting[D]) {
       case e: Exception =>
         e.printStackTrace()
     } finally if (poseEstimator != null) pool.returnObject(poseEstimator)
-    new PoseEstimatorProxy#PoseItem(yaw(0), pitch(0), roll(0))
+    new PoseItem(yaw(0), pitch(0), roll(0)) //PoseEstimatorProxy
   }
 
-  class PoseItem(private var yaw: Float, private var pitch: Float, private var roll: Float) {
+  class PoseItem( var yaw: Float,  var pitch: Float,  var roll: Float) {
     def getYaw: Float = yaw
 
     def setYaw(yaw: Float): Unit = {

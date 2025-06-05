@@ -5,7 +5,7 @@ import org.apache.commons.pool2.impl.{GenericObjectPool, GenericObjectPoolConfig
 import java.io.File
 import java.io.FileNotFoundException
 
-class SeetaModelSetting[D] extends GenericObjectPoolConfig[D]{
+class SeetaModelSetting extends GenericObjectPoolConfig[AnyRef]{
   var device: SeetaDevice = null
   var id = 0 // when device is GPU, id means GPU id
   var model: Array[String] = null

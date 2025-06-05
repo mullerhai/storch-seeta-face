@@ -3,13 +3,13 @@ package torch.seeta.sdk
 /**
  * 人脸特征点检测器
  */
-class FaceLandmarker[D] {
+class FaceLandmarker {
   //    static{
   //        System.loadLibrary("SeetaFaceLandmarker600_java");
   //    }
   var impl = 0
 
-  def this(setting: SeetaModelSetting[D])= {
+  def this(setting: SeetaModelSetting)= {
     this()
     this.construct(setting)
   }
@@ -19,7 +19,7 @@ class FaceLandmarker[D] {
     this.construct(model, device, id)
   }
 
-  @native private def construct(seeting: SeetaModelSetting[D]): Unit
+  @native private def construct(seeting: SeetaModelSetting): Unit
 
   @native private def construct(model: String, device: String, id: Int): Unit
 

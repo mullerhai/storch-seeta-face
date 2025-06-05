@@ -2,9 +2,8 @@ package torch.seeta.pool
 
 import org.apache.commons.pool2.PooledObject
 import org.apache.commons.pool2.PooledObjectFactory
-import org.apache.commons.pool2.impl.DefaultPooledObject
-import org.apache.commons.pool2.impl.GenericObjectPool
-import torch.seeta.sdk.QualityOfIntegrity
+import org.apache.commons.pool2.impl.{DefaultPooledObject, GenericObjectPool, GenericObjectPoolConfig}
+import torch.seeta.sdk.{EyeStateDetector, QualityOfIntegrity}
 
 class QualityOfIntegrityPool(config: SeetaConfSetting)  extends GenericObjectPool[QualityOfIntegrity](
   new PooledObjectFactory[QualityOfIntegrity]() {
@@ -73,5 +72,5 @@ class QualityOfIntegrityPool(config: SeetaConfSetting)  extends GenericObjectPoo
 
       //nothing
     }
-  }, config) {
+  }, config.asInstanceOf[GenericObjectPoolConfig[QualityOfIntegrity]]) {
 }

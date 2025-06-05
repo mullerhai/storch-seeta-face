@@ -2,9 +2,8 @@ package torch.seeta.pool
 
 import org.apache.commons.pool2.PooledObject
 import org.apache.commons.pool2.PooledObjectFactory
-import org.apache.commons.pool2.impl.DefaultPooledObject
-import org.apache.commons.pool2.impl.GenericObjectPool
-import torch.seeta.sdk.GenderPredictor
+import org.apache.commons.pool2.impl.{DefaultPooledObject, GenericObjectPool, GenericObjectPoolConfig}
+import torch.seeta.sdk.{EyeStateDetector, GenderPredictor}
 
 class GenderPredictorPool(config: SeetaConfSetting)  extends GenericObjectPool[GenderPredictor](
   new PooledObjectFactory[GenderPredictor]() {
@@ -28,7 +27,7 @@ class GenderPredictorPool(config: SeetaConfSetting)  extends GenericObjectPool[G
      */
     @throws[Exception]
     override def makeObject: PooledObject[GenderPredictor] = {
-      val detector = new GenderPredictor(config.getSeetaModelSetting[D][D])
+      val detector = new GenderPredictor(config.getSeetaModelSetting)
       new DefaultPooledObject[GenderPredictor](detector)
     }
 
@@ -73,5 +72,5 @@ class GenderPredictorPool(config: SeetaConfSetting)  extends GenericObjectPool[G
 
       //nothing
     }
-  }, config) {
+  }, config.asInstanceOf[GenericObjectPoolConfig[GenderPredictor]]) {
 }

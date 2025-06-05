@@ -3,7 +3,7 @@ package torch.seeta.sdk
 /**
  * 姿态估计
  */
-class PoseEstimator[D] {
+class PoseEstimator {
   var impl = 0
 
   /**
@@ -11,7 +11,7 @@ class PoseEstimator[D] {
    *
    * @param seting
    */
-  def this(seting: SeetaModelSetting[D]) ={
+  def this(seting: SeetaModelSetting) ={
     this()
     this.construct(seting)
   }
@@ -31,7 +31,7 @@ class PoseEstimator[D] {
    *
    * @param seting
    */
-  @native private def construct(seting: SeetaModelSetting[D]): Unit
+  @native private def construct(seting: SeetaModelSetting): Unit
 
   @native private def construct(seetaModel: String): Unit
 

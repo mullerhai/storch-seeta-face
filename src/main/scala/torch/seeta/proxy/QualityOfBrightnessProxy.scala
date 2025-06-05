@@ -3,11 +3,11 @@ package torch.seeta.proxy
 import torch.seeta.pool.{QualityOfBrightnessPool, SeetaConfSetting}
 import torch.seeta.sdk.{QualityOfBrightness, SeetaImageData, SeetaPointF, SeetaRect}
 
-class QualityOfBrightnessProxy[D] {
+class QualityOfBrightnessProxy {
   pool = new QualityOfBrightnessPool(new SeetaConfSetting)
   private var pool: QualityOfBrightnessPool = null
 
-  def this(confSetting: SeetaConfSetting[D]) ={
+  def this(confSetting: SeetaConfSetting) ={
     this()
     pool = new QualityOfBrightnessPool(confSetting)
   }
@@ -23,10 +23,10 @@ class QualityOfBrightnessProxy[D] {
       case e: Exception =>
         e.printStackTrace()
     } finally if (qualityOfBrightness != null) pool.returnObject(qualityOfBrightness)
-    new QualityOfBrightnessProxy#BrightnessItem(check, score(0))
+    new BrightnessItem(check, score(0)) //QualityOfBrightnessProxy
   }
 
-  class BrightnessItem(private var check: QualityOfBrightness.QualityLevel, private var score: Float) {
+  class BrightnessItem( var check: QualityOfBrightness.QualityLevel,  var score: Float) {
     def getCheck: QualityOfBrightness.QualityLevel = check
 
     def setCheck(check: QualityOfBrightness.QualityLevel): Unit = {

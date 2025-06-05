@@ -2,8 +2,7 @@ package torch.seeta.pool
 
 import org.apache.commons.pool2.PooledObject
 import org.apache.commons.pool2.PooledObjectFactory
-import org.apache.commons.pool2.impl.DefaultPooledObject
-import org.apache.commons.pool2.impl.GenericObjectPool
+import org.apache.commons.pool2.impl.{DefaultPooledObject, GenericObjectPool, GenericObjectPoolConfig}
 import torch.seeta.sdk.AgePredictor
 
 /**
@@ -31,7 +30,7 @@ class AgePredictorPool(config: SeetaConfSetting) extends GenericObjectPool[AgePr
      */
     @throws[Exception]
     override def makeObject: PooledObject[AgePredictor] = {
-      val detector = new AgePredictor(config.getSeetaModelSetting[D][D])
+      val detector = new AgePredictor(config.getSeetaModelSetting)
       new DefaultPooledObject[AgePredictor](detector)
     }
 
@@ -77,5 +76,5 @@ class AgePredictorPool(config: SeetaConfSetting) extends GenericObjectPool[AgePr
       //nothing
     }
   },
-  config ) {
+  config.asInstanceOf[GenericObjectPoolConfig[AgePredictor]] ) {
 }

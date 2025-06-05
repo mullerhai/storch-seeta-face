@@ -24,13 +24,13 @@ object FaceAntiSpoofing {
 //  }
 }
 
-class FaceAntiSpoofing[D] {
+class FaceAntiSpoofing {
   //	static{
   //		System.loadLibrary("FaceAntiSpoofing600_java");
   //	}
   var impl = 0
 
-  def this(setting: SeetaModelSetting[D]) ={
+  def this(setting: SeetaModelSetting) ={
     this()
     this.construct(setting)
   }
@@ -45,7 +45,7 @@ class FaceAntiSpoofing[D] {
     this.construct(model1, model2, device, id)
   }
 
-  @native private def construct(setting: SeetaModelSetting[D]): Unit
+  @native private def construct(setting: SeetaModelSetting): Unit
 
   @native private def construct(model: String, device: String, id: Int): Unit
 

@@ -2,9 +2,9 @@ package torch.seeta.pool
 
 import org.apache.commons.pool2.PooledObject
 import org.apache.commons.pool2.PooledObjectFactory
-import org.apache.commons.pool2.impl.DefaultPooledObject
-import org.apache.commons.pool2.impl.GenericObjectPool
-import torch.seeta.sdk.FaceDetector
+import org.apache.commons.pool2.impl.{DefaultPooledObject, GenericObjectPool, GenericObjectPoolConfig}
+import torch.seeta.sdk.{EyeStateDetector, FaceDetector}
+
 import scala.collection.mutable
 /**
  * 人脸检测器连接池 检测到的每个人脸位置
@@ -31,7 +31,7 @@ class FaceDetectorPool2(config: SeetaConfSetting)  extends GenericObjectPool[Fac
      */
     @throws[Exception]
     override def makeObject: PooledObject[FaceDetector] = {
-      val detector = new FaceDetector(config.getSeetaModelSetting[D][D])
+      val detector = new FaceDetector(config.getSeetaModelSetting)
       new DefaultPooledObject[FaceDetector](detector)
     }
 
@@ -76,5 +76,5 @@ class FaceDetectorPool2(config: SeetaConfSetting)  extends GenericObjectPool[Fac
 
       //nothing
     }
-  }, config
+  }, config.asInstanceOf[GenericObjectPoolConfig[FaceDetector]]
 )

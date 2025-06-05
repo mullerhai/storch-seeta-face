@@ -3,10 +3,10 @@ package torch.seeta.proxy
 import torch.seeta.pool.{QualityOfPoseExPool, SeetaConfSetting}
 import torch.seeta.sdk.{QualityOfPoseEx, SeetaImageData, SeetaPointF, SeetaRect}
 
-class QualityOfPoseExProxy[D]  {
+class QualityOfPoseExProxy  {
   private var pool: QualityOfPoseExPool = null
 
-  def this(setting: SeetaConfSetting[D])= {
+  def this(setting: SeetaConfSetting)= {
     this()
     pool = new QualityOfPoseExPool(setting)
   }
@@ -55,10 +55,10 @@ class QualityOfPoseExProxy[D]  {
       case e: Exception =>
         e.printStackTrace()
     } finally if (qualityOfPoseEx != null) pool.returnObject(qualityOfPoseEx)
-    new QualityOfPoseExProxy#PoseExItem(yaw(0), pitch(0), roll(0))
+    new PoseExItem(yaw(0), pitch(0), roll(0)) //QualityOfPoseExProxy
   }
 
-  class PoseExItem(private var yaw: Float, private var pitch: Float, private var roll: Float) {
+  class PoseExItem( var yaw: Float,  var pitch: Float,  var roll: Float) {
     def getYaw: Float = yaw
 
     def setYaw(yaw: Float): Unit = {

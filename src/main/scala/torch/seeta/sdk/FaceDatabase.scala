@@ -15,25 +15,25 @@ object FaceDatabase {
   @native def CropFaceV2(image: SeetaImageData, points: Array[SeetaPointF], face: SeetaImageData): Boolean
 }
 
-class FaceDatabase[D] {
+class FaceDatabase {
   //    static {
   //        System.loadLibrary("SeetaFaceRecognizer600_java");
   //    }
   var impl = 0
 
-  def this(seetaModel: SeetaModelSetting[D]) ={
+  def this(seetaModel: SeetaModelSetting) ={
     this()
     this.construct(seetaModel)
   }
 
-  def this(seetaModel: SeetaModelSetting[D], extractionCoreNumber: Int, comparationCoreNumber: Int) ={
+  def this(seetaModel: SeetaModelSetting, extractionCoreNumber: Int, comparationCoreNumber: Int) ={
     this()
     this.construct(seetaModel, extractionCoreNumber, comparationCoreNumber)
   }
 
-  @native private def construct(setting: SeetaModelSetting[D]): Unit
+  @native private def construct(setting: SeetaModelSetting): Unit
 
-  @native private def construct(setting: SeetaModelSetting[D], extractionCoreNumber: Int, comparationCoreNumber: Int): Unit
+  @native private def construct(setting: SeetaModelSetting, extractionCoreNumber: Int, comparationCoreNumber: Int): Unit
 
   @native def dispose(): Unit
 

@@ -50,7 +50,7 @@ object QualityOfLBN {
 }
 
 @throws[Exception]
-class QualityOfLBN[D](setting: SeetaModelSetting[D]) {
+class QualityOfLBN(setting: SeetaModelSetting) {
   this.construct(setting)
   //    static {
   //        System.loadLibrary("QualityAssessor300_java");
@@ -59,7 +59,7 @@ class QualityOfLBN[D](setting: SeetaModelSetting[D]) {
 
   @native
   @throws[Exception]
-  private def construct(setting: SeetaModelSetting[D]): Unit
+  private def construct(setting: SeetaModelSetting): Unit
 
   @native def dispose(): Unit
 

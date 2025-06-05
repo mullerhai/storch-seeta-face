@@ -3,10 +3,10 @@ package torch.seeta.proxy
 import torch.seeta.pool.{QualityOfLBNPool, SeetaConfSetting}
 import torch.seeta.sdk.{QualityOfLBN, SeetaImageData, SeetaPointF}
 
-class QualityOfLBNProxy[D]  {
+class QualityOfLBNProxy  {
   private var pool: QualityOfLBNPool = null
 
-  def this(setting: SeetaConfSetting[D]) ={
+  def this(setting: SeetaConfSetting) ={
     this()
     pool = new QualityOfLBNPool(setting)
   }
@@ -23,7 +23,7 @@ class QualityOfLBNProxy[D]  {
       case e: Exception =>
         e.printStackTrace()
     } finally if (qualityOfLBN != null) pool.returnObject(qualityOfLBN)
-    new QualityOfLBNProxy#LBNClass(light, blur, noise)
+    new LBNClass(light, blur, noise) //QualityOfLBNProxy
   }
 
   class LBNClass(light: Array[Int], blur: Array[Int], noise: Array[Int]) {

@@ -1,9 +1,8 @@
-package torch.seeta.pool
+package torch.seeta.proxy
 
-import org.apache.commons.pool2.PooledObject
-import org.apache.commons.pool2.PooledObjectFactory
-import org.apache.commons.pool2.impl.DefaultPooledObject
-import org.apache.commons.pool2.impl.GenericObjectPool
+import org.apache.commons.pool2.impl.{DefaultPooledObject, GenericObjectPool, GenericObjectPoolConfig}
+import org.apache.commons.pool2.{PooledObject, PooledObjectFactory}
+import torch.seeta.pool.SeetaConfSetting
 import torch.seeta.sdk.FaceAntiSpoofing
 
 class FaceAntiSpoofingPool(config: SeetaConfSetting) extends GenericObjectPool[FaceAntiSpoofing](
@@ -28,7 +27,7 @@ class FaceAntiSpoofingPool(config: SeetaConfSetting) extends GenericObjectPool[F
      */
     @throws[Exception]
     override def makeObject: PooledObject[FaceAntiSpoofing] = {
-      val detector = new FaceAntiSpoofing(config.getSeetaModelSetting[D][D])
+      val detector = new FaceAntiSpoofing(config.getSeetaModelSetting)
       new DefaultPooledObject[FaceAntiSpoofing](detector)
     }
 
@@ -73,4 +72,4 @@ class FaceAntiSpoofingPool(config: SeetaConfSetting) extends GenericObjectPool[F
 
       //nothing
     }
-})
+} , config.asInstanceOf[GenericObjectPoolConfig[FaceAntiSpoofing]])

@@ -2,9 +2,8 @@ package torch.seeta.pool
 
 import org.apache.commons.pool2.PooledObject
 import org.apache.commons.pool2.PooledObjectFactory
-import org.apache.commons.pool2.impl.DefaultPooledObject
-import org.apache.commons.pool2.impl.GenericObjectPool
-import torch.seeta.sdk.QualityOfPoseEx
+import org.apache.commons.pool2.impl.{DefaultPooledObject, GenericObjectPool, GenericObjectPoolConfig}
+import torch.seeta.sdk.{EyeStateDetector, QualityOfPoseEx}
 
 class QualityOfPoseExPool(config: SeetaConfSetting)  extends GenericObjectPool[QualityOfPoseEx](
   new PooledObjectFactory[QualityOfPoseEx]() {
@@ -28,7 +27,7 @@ class QualityOfPoseExPool(config: SeetaConfSetting)  extends GenericObjectPool[Q
      */
     @throws[Exception]
     override def makeObject: PooledObject[QualityOfPoseEx] = {
-      val detector = new QualityOfPoseEx(config.getSeetaModelSetting[D][D])
+      val detector = new QualityOfPoseEx(config.getSeetaModelSetting)
       new DefaultPooledObject[QualityOfPoseEx](detector)
     }
 
@@ -73,5 +72,5 @@ class QualityOfPoseExPool(config: SeetaConfSetting)  extends GenericObjectPool[Q
 
       //nothing
     }
-  }, config) {
+  }, config.asInstanceOf[GenericObjectPoolConfig[QualityOfPoseEx]]) {
 }
