@@ -21,12 +21,12 @@ class FaceDatabase {
   //    }
   var impl = 0
 
-  def this(seetaModel: SeetaModelSetting) {
+  def this(seetaModel: SeetaModelSetting) ={
     this()
     this.construct(seetaModel)
   }
 
-  def this(seetaModel: SeetaModelSetting, extractionCoreNumber: Int, comparationCoreNumber: Int) {
+  def this(seetaModel: SeetaModelSetting, extractionCoreNumber: Int, comparationCoreNumber: Int) ={
     this()
     this.construct(seetaModel, extractionCoreNumber, comparationCoreNumber)
   }

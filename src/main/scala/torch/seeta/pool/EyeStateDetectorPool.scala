@@ -26,9 +26,9 @@ class EyeStateDetectorPool(config: SeetaConfSetting)  extends GenericObjectPool[
      * @throws Exception
      */
     @throws[Exception]
-    override def makeObject: PooledObject[?] = {
+    override def makeObject: PooledObject[EyeStateDetector] = {
       val detector = new EyeStateDetector(config.getSeetaModelSetting)
-      new DefaultPooledObject[?](detector)
+      new DefaultPooledObject[EyeStateDetector](detector)
     }
 
     @throws[Exception]
@@ -68,7 +68,7 @@ class EyeStateDetectorPool(config: SeetaConfSetting)  extends GenericObjectPool[
      * @throws Exception
      */
     @throws[Exception]
-    override def passivateObject(pooledObject: PooledObject[?]): Unit = {
+    override def passivateObject(pooledObject: PooledObject[EyeStateDetector]): Unit = {
 
       //nothing
     }

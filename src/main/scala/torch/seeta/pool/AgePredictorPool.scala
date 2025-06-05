@@ -29,9 +29,9 @@ class AgePredictorPool(config: SeetaConfSetting)  extends GenericObjectPool[AgeP
      * @throws Exception
      */
     @throws[Exception]
-    override def makeObject: PooledObject[?] = {
+    override def makeObject: PooledObject[AgePredictor] = {
       val detector = new AgePredictor(config.getSeetaModelSetting)
-      new DefaultPooledObject[?](detector)
+      new DefaultPooledObject[AgePredictor](detector)
     }
 
     @throws[Exception]
@@ -71,7 +71,7 @@ class AgePredictorPool(config: SeetaConfSetting)  extends GenericObjectPool[AgeP
      * @throws Exception
      */
     @throws[Exception]
-    override def passivateObject(pooledObject: PooledObject[?]): Unit = {
+    override def passivateObject(pooledObject: PooledObject[AgePredictor]): Unit = {
 
       //nothing
     }

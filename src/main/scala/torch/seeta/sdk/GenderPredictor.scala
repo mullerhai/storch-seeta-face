@@ -1,16 +1,16 @@
 package torch.seeta.sdk
 
+import torch.seeta.sdk.GenderPredictor.Property.{PROPERTY_ARM_CPU_MODE, PROPERTY_NUMBER_THREADS}
+
 /**
  * 性别估计器
  */
 object GenderPredictor {
   enum Property:
-    case PROPERTY_NUMBER_THREADS, //Number of threads
-    PROPERTY_ARM_CPU_MODE //ARM CPU mode
-   def getValue: Int = match this {
+    case PROPERTY_NUMBER_THREADS, PROPERTY_ARM_CPU_MODE //ARM CPU mode
+   def getValue: Int =  this match {
       case PROPERTY_NUMBER_THREADS => 0
       case PROPERTY_ARM_CPU_MODE => 1
-    }
    }
 
 //  object Property extends Enumeration {

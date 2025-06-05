@@ -6,7 +6,8 @@ import org.apache.commons.pool2.impl.DefaultPooledObject
 import org.apache.commons.pool2.impl.GenericObjectPool
 import torch.seeta.sdk.QualityOfLBN
 
-class QualityOfLBNPool(config: SeetaConfSetting)  extends GenericObjectPool[QualityOfLBN](new PooledObjectFactory[QualityOfLBN]() {
+class QualityOfLBNPool(config: SeetaConfSetting)  extends GenericObjectPool[QualityOfLBN](
+  new PooledObjectFactory[QualityOfLBN]() {
 
 
   /**
@@ -26,9 +27,9 @@ class QualityOfLBNPool(config: SeetaConfSetting)  extends GenericObjectPool[Qual
      * @throws Exception
      */
     @throws[Exception]
-    override def makeObject: PooledObject[?] = {
+    override def makeObject: PooledObject[QualityOfLBN] = {
       val detector = new QualityOfLBN(config.getSeetaModelSetting)
-      new DefaultPooledObject[?](detector)
+      new DefaultPooledObject[QualityOfLBN](detector)
     }
 
     @throws[Exception]
@@ -68,7 +69,7 @@ class QualityOfLBNPool(config: SeetaConfSetting)  extends GenericObjectPool[Qual
      * @throws Exception
      */
     @throws[Exception]
-    override def passivateObject(pooledObject: PooledObject[?]): Unit = {
+    override def passivateObject(pooledObject: PooledObject[QualityOfLBN]): Unit = {
 
       //nothing
     }

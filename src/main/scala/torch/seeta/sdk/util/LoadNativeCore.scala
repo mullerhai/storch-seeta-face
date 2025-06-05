@@ -1,13 +1,15 @@
 package torch.seeta.sdk.util
 
 import torch.seeta.sdk.SeetaDevice
+import scala.jdk.CollectionConverters.*
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
-import java.util._
+import java.util.*
 import java.util.logging.Logger
-import java.util.stream.Collectors
+import scala.collection.mutable.ListBuffer
+import scala.math.Ordering.comparatorToOrdering
 
 /**
  * 动态加载dll
@@ -38,25 +40,25 @@ object LoadNativeCore {
     if (!isLoaded) {
       val device = getDevice(seetaDevice)
       val var1 = classOf[LoadNativeCore].getResourceAsStream(getPropertiesPath)
-      val properties = new Properties
+      val properties = new Properties()
       try {
         properties.load(var1)
-        val baseList = new util.ArrayList[DllItem]
-        val jniList = new util.ArrayList[DllItem]
-        import scala.collection.JavaConversions._
-        for (entry <- properties.entrySet) {
-          val key = entry.getKey.asInstanceOf[String]
-          val value = entry.getValue.asInstanceOf[String]
+        val baseList = new ListBuffer[DllItem]
+        val jniList = new ListBuffer[DllItem]
+        
+        for (entry <- properties.asScala) {
+          val key = entry._1.asInstanceOf[String]
+          val value = entry._2.asInstanceOf[String]
           val dllItem = new DllItem
           dllItem.setKey(key)
           if (key.contains("base")) {
             if (value.contains("tennis")) dllItem.setValue(getPrefix + "base/" + device + "/" + value)
             else dllItem.setValue(getPrefix + "base/" + value)
-            baseList.add(dllItem)
+            baseList.append(dllItem)
           }
           else {
             dllItem.setValue(getPrefix + value)
-            jniList.add(dllItem)
+            jniList.append(dllItem)
           }
         }
         /*
@@ -64,20 +66,20 @@ object LoadNativeCore {
                          */
         val basePath = getSortedPath(baseList)
         val sdkPath = getSortedPath(jniList)
-        val fileList = new util.ArrayList[File]
+        val fileList = new ListBuffer[File]
         /*
                           拷贝文件到临时目录
                          */
-        import scala.collection.JavaConversions._
+        
         for (b <- basePath) {
           fileList.add(copyDLL(b))
         }
-        import scala.collection.JavaConversions._
+        
         for (s <- sdkPath) {
           fileList.add(copyDLL(s))
         }
         // 加载 dll文件
-        fileList.forEach((file: File) => {
+        fileList.foreach((file: File) => {
           System.load(file.getAbsolutePath)
           logger.info(String.format("load %s finish", file.getAbsolutePath))
         })
@@ -144,7 +146,8 @@ object LoadNativeCore {
    * @param list
    * @return List<String>
    */
-  private def getSortedPath(list: util.List[DllItem]) = list.stream.sorted(Comparator.comparing((dllItem: DllItem) => {
+  private def getSortedPath(list: ListBuffer[DllItem]) =
+    list.sorted(Comparator.comparing((dllItem: DllItem) => {
     val i = dllItem.getKey.lastIndexOf(".") + 1
     val substring = dllItem.getKey.substring(i)
     Integer.valueOf(substring)
@@ -180,7 +183,8 @@ object LoadNativeCore {
     var index = 0
     val bytes = new Array[Byte](1024)
     val downloadFile = new FileOutputStream(destination)
-    while ((index = input.read(bytes)) != -1) {
+    while ({index = input.read(bytes)
+      index!= -1}) {
       downloadFile.write(bytes, 0, index)
       downloadFile.flush()
     }

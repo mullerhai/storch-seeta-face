@@ -4,13 +4,17 @@ package torch.seeta.sdk
  * 深度学习的人脸姿态评估器。
  */
 object QualityOfPoseEx {
-  object QualityLevel extends Enumeration {
-    type QualityLevel = Value
-    val LOW, //Quality level is low
+  enum QualityLevel:
+    case LOW, //Quality level is low
     MEDIUM, //Quality level is medium
-    HIGH = Value
-    //Quality level is high
-  }
+    HIGH //Quality level is high
+//  object QualityLevel extends Enumeration {
+//    type QualityLevel = Value
+//    val LOW, //Quality level is low
+//    MEDIUM, //Quality level is medium
+//    HIGH = Value
+//    //Quality level is high
+//  }
 
   enum Property:
     case YAW_LOW_THRESHOLD, YAW_HIGH_THRESHOLD, PITCH_LOW_THRESHOLD, PITCH_HIGH_THRESHOLD, ROLL_LOW_THRESHOLD, ROLL_HIGH_THRESHOLD

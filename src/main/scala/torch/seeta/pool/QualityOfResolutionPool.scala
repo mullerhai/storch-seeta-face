@@ -6,7 +6,8 @@ import org.apache.commons.pool2.impl.DefaultPooledObject
 import org.apache.commons.pool2.impl.GenericObjectPool
 import torch.seeta.sdk.QualityOfResolution
 
-class QualityOfResolutionPool(config: SeetaConfSetting)  extends GenericObjectPool[QualityOfResolution](new PooledObjectFactory[QualityOfResolution]() {
+class QualityOfResolutionPool(config: SeetaConfSetting)  extends GenericObjectPool[QualityOfResolution](
+  new PooledObjectFactory[QualityOfResolution]() {
 
 
   /**
@@ -26,9 +27,9 @@ class QualityOfResolutionPool(config: SeetaConfSetting)  extends GenericObjectPo
      * @throws Exception
      */
     @throws[Exception]
-    override def makeObject: PooledObject[?] = {
+    override def makeObject: PooledObject[QualityOfResolution] = {
       val detector = new QualityOfResolution
-      new DefaultPooledObject[?](detector)
+      new DefaultPooledObject[QualityOfResolution](detector)
     }
 
     @throws[Exception]
@@ -68,7 +69,7 @@ class QualityOfResolutionPool(config: SeetaConfSetting)  extends GenericObjectPo
      * @throws Exception
      */
     @throws[Exception]
-    override def passivateObject(pooledObject: PooledObject[?]): Unit = {
+    override def passivateObject(pooledObject: PooledObject[QualityOfResolution]): Unit = {
 
       //nothing
     }

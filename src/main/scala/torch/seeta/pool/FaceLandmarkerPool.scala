@@ -9,7 +9,8 @@ import torch.seeta.sdk.FaceLandmarker
 /**
  * 人脸特征点检测器  有 5点和68点
  */
-class FaceLandmarkerPool(config: SeetaConfSetting) extends GenericObjectPool[FaceLandmarker](new PooledObjectFactory[FaceLandmarker]() {
+class FaceLandmarkerPool(config: SeetaConfSetting) extends GenericObjectPool[FaceLandmarker](
+  new PooledObjectFactory[FaceLandmarker]() {
   @throws[Exception]
   override def makeObject: PooledObject[FaceLandmarker] = {
     val faceLandmarker = new FaceLandmarker(config.getSeetaModelSetting)

@@ -7,16 +7,22 @@ package torch.seeta.sdk
  *
  */
 object AgePredictor {
-  object Property extends Enumeration {
-    type Property = Value
-    val PROPERTY_NUMBER_THREADS, PROPERTY_ARM_CPU_MODE = Value
-    private var value = 0d ef this (value: Int) {
-      this ()
-      this.value = value
+  enum Property:
+    case PROPERTY_NUMBER_THREADS, PROPERTY_ARM_CPU_MODE
+    def getValue: Int = this match {
+      case PROPERTY_NUMBER_THREADS => 0
+      case PROPERTY_ARM_CPU_MODE => 1
     }
-
-    def getValue: Int = value
-  }
+//  object Property extends Enumeration {
+//    type Property = Value
+//    val PROPERTY_NUMBER_THREADS, PROPERTY_ARM_CPU_MODE = Value
+//    private var value = 0d ef this (value: Int) {
+//      this ()
+//      this.value = value
+//    }
+//
+//    def getValue: Int = value
+//  }
 }
 
 class AgePredictor(setting: SeetaModelSetting) {

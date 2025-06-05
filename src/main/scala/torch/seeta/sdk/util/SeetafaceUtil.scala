@@ -164,7 +164,7 @@ object SeetafaceUtil {
    *  7月9日 下午2:30:02
    */
   def toBufferedImage(data: Array[Byte], width: Int, height: Int): BufferedImage = {
-    val `type` = BufferedImage.TYPE_3BYTE_BGR
+    val ftype = BufferedImage.TYPE_3BYTE_BGR
     // bgr to rgb
     //        byte b;
     //        for (int i = 0; i < data.length; i = i + 3) {
@@ -172,7 +172,7 @@ object SeetafaceUtil {
     //            data[i] = data[i + 2];
     //            data[i + 2] = b;
     //        }
-    val image = new BufferedImage(width, height, `type`)
+    val image = new BufferedImage(width, height, ftype)
     image.getRaster.setDataElements(0, 0, width, height, data)
     image
   }
@@ -187,10 +187,12 @@ object SeetafaceUtil {
    * @param targetH
    * @return
    */
-  def resize(source: BufferedImage, targetW: Int, targetH: Int): BufferedImage = {
+  def resize(source: BufferedImage, targetWs: Int, targetHs: Int): BufferedImage = {
     // targetW，targetH分别表示目标长和宽
-    val `type` = source.getType
+    val ftype = source.getType
     var target: BufferedImage = null
+    var targetW = targetWs
+    var targetH = targetHs
     var sx = targetW.toDouble / source.getWidth
     var sy = targetH.toDouble / source.getHeight
     // 这里想实现在targetW，targetH范围内实现等比缩放。如果不需要等比缩放
@@ -203,13 +205,13 @@ object SeetafaceUtil {
       sy = sx
       targetH = (sy * source.getHeight).toInt
     }
-    if (`type` == BufferedImage.TYPE_CUSTOM) { // handmade
+    if (ftype == BufferedImage.TYPE_CUSTOM) { // handmade
       val cm = source.getColorModel
       val raster = cm.createCompatibleWritableRaster(targetW, targetH)
       val alphaPremultiplied = cm.isAlphaPremultiplied
       target = new BufferedImage(cm, raster, alphaPremultiplied, null)
     }
-    else target = new BufferedImage(targetW, targetH, `type`)
+    else target = new BufferedImage(targetW, targetH, ftype)
     val g = target.createGraphics
     // smoother than exlax:
     g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC)
@@ -232,7 +234,7 @@ object SeetafaceUtil {
     val frame = new JFrame
     frame.setTitle(title)
     frame.setSize(image.getWidth, image.getHeight)
-    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE)
+    frame.setDefaultCloseOperation(2) //JFrame.DISPOSE_ON_CLOSE)
     val label = new JLabel
     frame.add(label)
     frame.setVisible(true)

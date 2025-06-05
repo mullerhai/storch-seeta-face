@@ -6,14 +6,22 @@ package torch.seeta.sdk
  *
  */
 object FaceAntiSpoofing {
-  object Status extends Enumeration {
-    type Status = Value
-    val REAL, //< 真实人脸
+  enum Status:
+    case REAL, //< 真实人脸
     SPOOF, //< 攻击人脸（假人脸）
     FUZZY, //< 无法判断（人脸成像质量不好）
-    DETECTING = Value
+    DETECTING //< 正在检测
+
     //< 正在检测
-  }
+  
+//  object Status extends Enumeration {
+//    type Status = Value
+//    val REAL, //< 真实人脸
+//    SPOOF, //< 攻击人脸（假人脸）
+//    FUZZY, //< 无法判断（人脸成像质量不好）
+//    DETECTING = Value
+//    //< 正在检测
+//  }
 }
 
 class FaceAntiSpoofing {
@@ -22,17 +30,17 @@ class FaceAntiSpoofing {
   //	}
   var impl = 0
 
-  def this(setting: SeetaModelSetting) {
+  def this(setting: SeetaModelSetting) ={
     this()
     this.construct(setting)
   }
 
-  def this(model: String, device: String, id: Int) {
+  def this(model: String, device: String, id: Int) = {
     this()
     this.construct(model, device, id)
   }
 
-  def this(model1: String, model2: String, device: String, id: Int) {
+  def this(model1: String, model2: String, device: String, id: Int) ={
     this()
     this.construct(model1, model2, device, id)
   }

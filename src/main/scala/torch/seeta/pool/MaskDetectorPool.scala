@@ -26,9 +26,9 @@ class MaskDetectorPool(config: SeetaConfSetting)  extends GenericObjectPool[Mask
      * @throws Exception
      */
     @throws[Exception]
-    override def makeObject: PooledObject[?] = {
+    override def makeObject: PooledObject[MaskDetector] = {
       val detector = new MaskDetector(config.getSeetaModelSetting)
-      new DefaultPooledObject[?](detector)
+      new DefaultPooledObject[MaskDetector](detector)
     }
 
     @throws[Exception]
@@ -68,7 +68,7 @@ class MaskDetectorPool(config: SeetaConfSetting)  extends GenericObjectPool[Mask
      * @throws Exception
      */
     @throws[Exception]
-    override def passivateObject(pooledObject: PooledObject[?]): Unit = {
+    override def passivateObject(pooledObject: PooledObject[MaskDetector]): Unit = {
 
       //nothing
     }

@@ -6,7 +6,8 @@ import org.apache.commons.pool2.impl.DefaultPooledObject
 import org.apache.commons.pool2.impl.GenericObjectPool
 import torch.seeta.sdk.GenderPredictor
 
-class GenderPredictorPool(config: SeetaConfSetting)  extends GenericObjectPool[GenderPredictor](new PooledObjectFactory[GenderPredictor]() {
+class GenderPredictorPool(config: SeetaConfSetting)  extends GenericObjectPool[GenderPredictor](
+  new PooledObjectFactory[GenderPredictor]() {
 
 
   /**
@@ -26,9 +27,9 @@ class GenderPredictorPool(config: SeetaConfSetting)  extends GenericObjectPool[G
      * @throws Exception
      */
     @throws[Exception]
-    override def makeObject: PooledObject[?] = {
+    override def makeObject: PooledObject[GenderPredictor] = {
       val detector = new GenderPredictor(config.getSeetaModelSetting)
-      new DefaultPooledObject[?](detector)
+      new DefaultPooledObject[GenderPredictor](detector)
     }
 
     @throws[Exception]
@@ -68,7 +69,7 @@ class GenderPredictorPool(config: SeetaConfSetting)  extends GenericObjectPool[G
      * @throws Exception
      */
     @throws[Exception]
-    override def passivateObject(pooledObject: PooledObject[?]): Unit = {
+    override def passivateObject(pooledObject: PooledObject[GenderPredictor]): Unit = {
 
       //nothing
     }

@@ -4,13 +4,17 @@ package torch.seeta.sdk
  * 非深度学习的人脸清晰度评估器
  */
 object QualityOfClarity {
-  object QualityLevel extends Enumeration {
-    type QualityLevel = Value
-    val LOW, //Quality level is low
+  enum QualityLevel:
+    case LOW, //Quality level is low
     MEDIUM, //Quality level is medium
-    HIGH = Value
-    //Quality level is high
-  }
+    HIGH //Quality level is high
+//  object QualityLevel extends Enumeration {
+//    type QualityLevel = Value
+//    val LOW, //Quality level is low
+//    MEDIUM, //Quality level is medium
+//    HIGH = Value
+//    //Quality level is high
+//  }
 }
 
 class QualityOfClarity {

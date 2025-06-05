@@ -6,16 +6,26 @@ package torch.seeta.sdk
  *
  */
 object FaceDetector {
-  object Property extends Enumeration {
-    type Property = Value
-    val PROPERTY_MIN_FACE_SIZE, PROPERTY_THRESHOLD, PROPERTY_MAX_IMAGE_WIDTH, PROPERTY_MAX_IMAGE_HEIGHT, PROPERTY_NUMBER_THREADS, PROPERTY_ARM_CPU_MODE = Value
-    private var value = 0d ef this (value: Int) {
-      this ()
-      this.value = value
+  enum Property:
+    case PROPERTY_MIN_FACE_SIZE, PROPERTY_THRESHOLD, PROPERTY_MAX_IMAGE_WIDTH, PROPERTY_MAX_IMAGE_HEIGHT, PROPERTY_NUMBER_THREADS, PROPERTY_ARM_CPU_MODE
+    def getValue: Int = this match {
+      case PROPERTY_MIN_FACE_SIZE => 0
+      case PROPERTY_THRESHOLD => 1
+      case PROPERTY_MAX_IMAGE_WIDTH => 2
+      case PROPERTY_MAX_IMAGE_HEIGHT => 3
+      case PROPERTY_NUMBER_THREADS => 4
+      case PROPERTY_ARM_CPU_MODE => 5
     }
-
-    def getValue: Int = value
-  }
+//  object Property extends Enumeration {
+//    type Property = Value
+//    val PROPERTY_MIN_FACE_SIZE, PROPERTY_THRESHOLD, PROPERTY_MAX_IMAGE_WIDTH, PROPERTY_MAX_IMAGE_HEIGHT, PROPERTY_NUMBER_THREADS, PROPERTY_ARM_CPU_MODE = Value
+//    private var value = 0d ef this (value: Int) {
+//      this ()
+//      this.value = value
+//    }
+//
+//    def getValue: Int = value
+//  }
 }
 
 @throws[Exception]

@@ -6,7 +6,8 @@ import org.apache.commons.pool2.impl.DefaultPooledObject
 import org.apache.commons.pool2.impl.GenericObjectPool
 import torch.seeta.sdk.QualityOfIntegrity
 
-class QualityOfIntegrityPool(config: SeetaConfSetting)  extends GenericObjectPool[QualityOfIntegrity](new PooledObjectFactory[QualityOfIntegrity]() {
+class QualityOfIntegrityPool(config: SeetaConfSetting)  extends GenericObjectPool[QualityOfIntegrity](
+  new PooledObjectFactory[QualityOfIntegrity]() {
 
 
   /**
@@ -26,9 +27,9 @@ class QualityOfIntegrityPool(config: SeetaConfSetting)  extends GenericObjectPoo
      * @throws Exception
      */
     @throws[Exception]
-    override def makeObject: PooledObject[?] = {
+    override def makeObject: PooledObject[QualityOfIntegrity] = {
       val detector = new QualityOfIntegrity
-      new DefaultPooledObject[?](detector)
+      new DefaultPooledObject[QualityOfIntegrity](detector)
     }
 
     @throws[Exception]
@@ -68,7 +69,7 @@ class QualityOfIntegrityPool(config: SeetaConfSetting)  extends GenericObjectPoo
      * @throws Exception
      */
     @throws[Exception]
-    override def passivateObject(pooledObject: PooledObject[?]): Unit = {
+    override def passivateObject(pooledObject: PooledObject[QualityOfIntegrity]): Unit = {
 
       //nothing
     }

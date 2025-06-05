@@ -6,11 +6,20 @@ package torch.seeta.sdk
  *
  */
 object EyeStateDetector {
-  final class EYE_STATE {}
+  enum EYE_STATE:
+    case EYE_CLOSE, EYE_OPEN, EYE_RANDOM, EYE_UNKNOWN
+  
+  //    public enum EYE_STATE {
+  //        EYE_CLOSE,
+  //        EYE_OPEN,
+  //        EYE_RANDOM,
+  //        EYE_UNKNOWN
+  //    }
+//  final class EYE_STATE {}
 }
 
-class EyeStateDetector @throws[Exception]
-(setting: SeetaModelSetting) {
+@throws[Exception]
+class EyeStateDetector(setting: SeetaModelSetting) {
   this.construct(setting)
   //    static{
   //        System.loadLibrary("SeetaEyeStateDetector200_java");

@@ -5,13 +5,15 @@ package torch.seeta.sdk
  * 人脸亮度评估器构造函数。
  */
 object QualityOfBrightness {
-  object QualityLevel extends Enumeration {
-    type QualityLevel = Value
-    val LOW, //Quality level is low
-    MEDIUM, //Quality level is medium
-    HIGH = Value
-    //Quality level is high
-  }
+  enum QualityLevel:
+    case LOW, MEDIUM, HIGH
+//  object QualityLevel extends Enumeration {
+//    type QualityLevel = Value
+//    val LOW, //Quality level is low
+//    MEDIUM, //Quality level is medium
+//    HIGH = Value
+//    //Quality level is high
+//  }
 }
 
 class QualityOfBrightness {
