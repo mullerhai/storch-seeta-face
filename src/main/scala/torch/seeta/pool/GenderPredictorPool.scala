@@ -28,7 +28,7 @@ class GenderPredictorPool(config: SeetaConfSetting)  extends GenericObjectPool[G
      */
     @throws[Exception]
     override def makeObject: PooledObject[GenderPredictor] = {
-      val detector = new GenderPredictor(config.getSeetaModelSetting)
+      val detector = new GenderPredictor(config.getSeetaModelSetting[D][D])
       new DefaultPooledObject[GenderPredictor](detector)
     }
 

@@ -3,7 +3,7 @@ package torch.seeta.proxy
 import torch.seeta.pool.{PoseEstimatorPool, SeetaConfSetting}
 import torch.seeta.sdk.{PoseEstimator, SeetaImageData, SeetaRect}
 
-class PoseEstimatorProxy(confSetting: SeetaConfSetting) {
+class PoseEstimatorProxy[D](confSetting: SeetaConfSetting[D]) {
   pool = new PoseEstimatorPool(confSetting)
   private var pool: PoseEstimatorPool = null
 

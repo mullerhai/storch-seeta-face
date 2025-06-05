@@ -28,7 +28,7 @@ class QualityOfPoseExPool(config: SeetaConfSetting)  extends GenericObjectPool[Q
      */
     @throws[Exception]
     override def makeObject: PooledObject[QualityOfPoseEx] = {
-      val detector = new QualityOfPoseEx(config.getSeetaModelSetting)
+      val detector = new QualityOfPoseEx(config.getSeetaModelSetting[D][D])
       new DefaultPooledObject[QualityOfPoseEx](detector)
     }
 

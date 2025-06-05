@@ -31,7 +31,7 @@ class FaceDetectorPool2(config: SeetaConfSetting)  extends GenericObjectPool[Fac
      */
     @throws[Exception]
     override def makeObject: PooledObject[FaceDetector] = {
-      val detector = new FaceDetector(config.getSeetaModelSetting)
+      val detector = new FaceDetector(config.getSeetaModelSetting[D][D])
       new DefaultPooledObject[FaceDetector](detector)
     }
 
@@ -77,4 +77,4 @@ class FaceDetectorPool2(config: SeetaConfSetting)  extends GenericObjectPool[Fac
       //nothing
     }
   }, config
-) 
+)

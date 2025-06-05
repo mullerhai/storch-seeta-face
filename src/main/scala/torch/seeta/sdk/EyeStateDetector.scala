@@ -8,7 +8,7 @@ package torch.seeta.sdk
 object EyeStateDetector {
   enum EYE_STATE:
     case EYE_CLOSE, EYE_OPEN, EYE_RANDOM, EYE_UNKNOWN
-  
+
   //    public enum EYE_STATE {
   //        EYE_CLOSE,
   //        EYE_OPEN,
@@ -19,7 +19,7 @@ object EyeStateDetector {
 }
 
 @throws[Exception]
-class EyeStateDetector(setting: SeetaModelSetting) {
+class EyeStateDetector[D](setting: SeetaModelSetting[D]) {
   this.construct(setting)
   //    static{
   //        System.loadLibrary("SeetaEyeStateDetector200_java");
@@ -28,7 +28,7 @@ class EyeStateDetector(setting: SeetaModelSetting) {
 
   @native
   @throws[Exception]
-  private def construct(setting: SeetaModelSetting): Unit
+  private def construct(setting: SeetaModelSetting[D]): Unit
 
   @native def dispose(): Unit
 

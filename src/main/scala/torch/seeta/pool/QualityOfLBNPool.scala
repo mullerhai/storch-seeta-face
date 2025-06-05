@@ -28,7 +28,7 @@ class QualityOfLBNPool(config: SeetaConfSetting)  extends GenericObjectPool[Qual
      */
     @throws[Exception]
     override def makeObject: PooledObject[QualityOfLBN] = {
-      val detector = new QualityOfLBN(config.getSeetaModelSetting)
+      val detector = new QualityOfLBN(config.getSeetaModelSetting[D][D])
       new DefaultPooledObject[QualityOfLBN](detector)
     }
 

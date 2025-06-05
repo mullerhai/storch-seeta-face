@@ -39,7 +39,7 @@ object QualityOfPoseEx {
 }
 
 @throws[Exception]
-class QualityOfPoseEx(setting: SeetaModelSetting){
+class QualityOfPoseEx[D](setting: SeetaModelSetting[D]){
 
 /**
  * 人脸姿态评估器构造函数。
@@ -61,7 +61,7 @@ class QualityOfPoseEx(setting: SeetaModelSetting){
    */
   @native
   @throws[Exception]
-  private def construct(setting: SeetaModelSetting): Unit
+  private def construct(setting: SeetaModelSetting[D]): Unit
 
   @native def dispose(): Unit
 

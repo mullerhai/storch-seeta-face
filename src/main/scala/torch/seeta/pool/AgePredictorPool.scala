@@ -9,7 +9,8 @@ import torch.seeta.sdk.AgePredictor
 /**
  * 年龄评估器
  */
-class AgePredictorPool(config: SeetaConfSetting)  extends GenericObjectPool[AgePredictor](new PooledObjectFactory[AgePredictor]() {
+class AgePredictorPool(config: SeetaConfSetting) extends GenericObjectPool[AgePredictor](
+  new PooledObjectFactory[AgePredictor]() {
 
 
   /**
@@ -30,7 +31,7 @@ class AgePredictorPool(config: SeetaConfSetting)  extends GenericObjectPool[AgeP
      */
     @throws[Exception]
     override def makeObject: PooledObject[AgePredictor] = {
-      val detector = new AgePredictor(config.getSeetaModelSetting)
+      val detector = new AgePredictor(config.getSeetaModelSetting[D][D])
       new DefaultPooledObject[AgePredictor](detector)
     }
 
@@ -75,5 +76,6 @@ class AgePredictorPool(config: SeetaConfSetting)  extends GenericObjectPool[AgeP
 
       //nothing
     }
-  }, config) {
+  },
+  config ) {
 }

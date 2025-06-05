@@ -13,7 +13,7 @@ class FaceLandmarkerPool(config: SeetaConfSetting) extends GenericObjectPool[Fac
   new PooledObjectFactory[FaceLandmarker]() {
   @throws[Exception]
   override def makeObject: PooledObject[FaceLandmarker] = {
-    val faceLandmarker = new FaceLandmarker(config.getSeetaModelSetting)
+    val faceLandmarker = new FaceLandmarker(config.getSeetaModelSetting[D][D])
     new DefaultPooledObject[FaceLandmarker](faceLandmarker)
   }
 

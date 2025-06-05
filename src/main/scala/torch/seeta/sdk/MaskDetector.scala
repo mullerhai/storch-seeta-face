@@ -4,7 +4,7 @@ package torch.seeta.sdk
  * 口罩检测器
  */
 @throws[Exception]
-class MaskDetector(setting: SeetaModelSetting) {
+class MaskDetector[D](setting: SeetaModelSetting[D]) {
   this.construct(setting)
   //    static {
   //        System.loadLibrary("SeetaMaksDetector200_java");
@@ -13,7 +13,7 @@ class MaskDetector(setting: SeetaModelSetting) {
 
   @native
   @throws[Exception]
-  private def construct(setting: SeetaModelSetting): Unit
+  private def construct(setting: SeetaModelSetting[D]): Unit
 
   @native def dispose(): Unit
 

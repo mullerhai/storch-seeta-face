@@ -1,9 +1,11 @@
 package torch.seeta.sdk
 
+import org.apache.commons.pool2.impl.{GenericObjectPool, GenericObjectPoolConfig}
+
 import java.io.File
 import java.io.FileNotFoundException
 
-class SeetaModelSetting {
+class SeetaModelSetting[D] extends GenericObjectPoolConfig[D]{
   var device: SeetaDevice = null
   var id = 0 // when device is GPU, id means GPU id
   var model: Array[String] = null

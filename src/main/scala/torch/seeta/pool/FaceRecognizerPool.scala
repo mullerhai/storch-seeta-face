@@ -12,7 +12,7 @@ import torch.seeta.sdk.FaceRecognizer
 class FaceRecognizerPool(config: SeetaConfSetting) extends GenericObjectPool[FaceRecognizer](
   new PooledObjectFactory[FaceRecognizer]() {
   @throws[Exception]
-  override def makeObject = new DefaultPooledObject[FaceRecognizer](new FaceRecognizer(config.getSeetaModelSetting))
+  override def makeObject = new DefaultPooledObject[FaceRecognizer](new FaceRecognizer(config.getSeetaModelSetting[D][D]))
 
   @throws[Exception]
   override def destroyObject(pooledObject: PooledObject[FaceRecognizer]): Unit = {

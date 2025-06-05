@@ -3,10 +3,10 @@ package torch.seeta.proxy
 import torch.seeta.pool.{QualityOfPoseExPool, SeetaConfSetting}
 import torch.seeta.sdk.{QualityOfPoseEx, SeetaImageData, SeetaPointF, SeetaRect}
 
-class QualityOfPoseExProxy  {
+class QualityOfPoseExProxy[D]  {
   private var pool: QualityOfPoseExPool = null
 
-  def this(setting: SeetaConfSetting)= {
+  def this(setting: SeetaConfSetting[D])= {
     this()
     pool = new QualityOfPoseExPool(setting)
   }

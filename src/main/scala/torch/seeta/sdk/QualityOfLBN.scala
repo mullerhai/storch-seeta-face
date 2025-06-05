@@ -21,7 +21,7 @@ object QualityOfLBN {
 
   enum NOISESTATE:
     case HAVENOISE, NONOISE
-    
+
 //  object NOISESTATE extends Enumeration {
 //    type NOISESTATE = Value
 //    val HAVENOISE, NONOISE = Value
@@ -36,7 +36,7 @@ object QualityOfLBN {
       case PROPERTY_BLUR_THRESH => 3
       case PROPERTY_NOISE_THRESH => 4
     }
-    
+
 //  object Property extends Enumeration {
 //    type Property = Value
 //    val PROPERTY_NUMBER_THREADS, PROPERTY_ARM_CPU_MODE, PROPERTY_LIGHT_THRESH, PROPERTY_BLUR_THRESH, PROPERTY_NOISE_THRESH = Value
@@ -50,7 +50,7 @@ object QualityOfLBN {
 }
 
 @throws[Exception]
-class QualityOfLBN(setting: SeetaModelSetting) {
+class QualityOfLBN[D](setting: SeetaModelSetting[D]) {
   this.construct(setting)
   //    static {
   //        System.loadLibrary("QualityAssessor300_java");
@@ -59,7 +59,7 @@ class QualityOfLBN(setting: SeetaModelSetting) {
 
   @native
   @throws[Exception]
-  private def construct(setting: SeetaModelSetting): Unit
+  private def construct(setting: SeetaModelSetting[D]): Unit
 
   @native def dispose(): Unit
 

@@ -29,7 +29,7 @@ object FaceDetector {
 }
 
 @throws[Exception]
-class FaceDetector(setting: SeetaModelSetting) {
+class FaceDetector[D](setting: SeetaModelSetting[D]) {
   this.construct(setting)
   //    static {
   //        System.loadLibrary("SeetaFaceDetector600_java");
@@ -38,7 +38,7 @@ class FaceDetector(setting: SeetaModelSetting) {
 
   @native
   @throws[Exception]
-  private def construct(setting: SeetaModelSetting): Unit
+  private def construct(setting: SeetaModelSetting[D]): Unit
 
   @native def dispose(): Unit
 

@@ -3,11 +3,11 @@ package torch.seeta.proxy
 import torch.seeta.pool.{QualityOfIntegrityPool, SeetaConfSetting}
 import torch.seeta.sdk.{QualityOfIntegrity, SeetaImageData, SeetaPointF, SeetaRect}
 
-class QualityOfIntegrityProxy {
+class QualityOfIntegrityProxy[D] {
   pool = new QualityOfIntegrityPool(new SeetaConfSetting)
   private var pool: QualityOfIntegrityPool = null
 
-  def this(setting: SeetaConfSetting)= {
+  def this(setting: SeetaConfSetting[D])= {
     this()
     pool = new QualityOfIntegrityPool(setting)
   }

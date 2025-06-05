@@ -1,12 +1,12 @@
 package torch.seeta.sdk
 
-//import torch.seeta.SeetaModelSetting;
+//import torch.seeta.SeetaModelSetting[D][D];
 
 /**
  * 人脸识别器
  */
 object FaceRecognizer {
-  
+
   enum Property:
     case PROPERTY_NUMBER_THREADS, PROPERTY_ARM_CPU_MODE
     def getValue: Int = this match {
@@ -25,13 +25,13 @@ object FaceRecognizer {
 //  }
 }
 
-class FaceRecognizer {
+class FaceRecognizer[D] {
   //    static {
   //        System.loadLibrary("SeetaFaceRecognizer600_java");
   //    }
   var impl = 0
 
-  def this(setting: SeetaModelSetting) ={
+  def this(setting: SeetaModelSetting[D]) ={
     this()
     this.construct(setting)
   }
@@ -41,7 +41,7 @@ class FaceRecognizer {
     this.construct(model, device, id)
   }
 
-  @native private def construct(setting: SeetaModelSetting): Unit
+  @native private def construct(setting: SeetaModelSetting[D]): Unit
 
   @native private def construct(model: String, device: String, id: Int): Unit
 

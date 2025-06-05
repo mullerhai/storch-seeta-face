@@ -27,7 +27,7 @@ class PoseEstimatorPool(config: SeetaConfSetting)  extends GenericObjectPool[Pos
      */
     @throws[Exception]
     override def makeObject: PooledObject[PoseEstimator] = {
-      val detector = new PoseEstimator(config.getSeetaModelSetting)
+      val detector = new PoseEstimator(config.getSeetaModelSetting[D][D])
       new DefaultPooledObject[PoseEstimator](detector)
     }
 

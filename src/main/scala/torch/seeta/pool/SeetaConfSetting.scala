@@ -1,7 +1,8 @@
 package torch.seeta.pool
 
-import org.apache.commons.pool2.impl.GenericObjectPoolConfig
-import torch.seeta.sdk.{SeetaDevice, SeetaModelSetting}
+import org.apache.commons.pool2.impl.{GenericObjectPool, GenericObjectPoolConfig}
+import torch.seeta.sdk.{SeetaDevice, SeetaModelSetting[D][D]}
+
 import java.io.FileNotFoundException
 
 /**
@@ -21,35 +22,35 @@ import java.io.FileNotFoundException
  * timeBetweenEvictionRunsMillis 驱逐定时器周期  false
  * blockWhenExhausted 对象池耗尽是否 block true
  */
-class SeetaConfSetting extends GenericObjectPoolConfig[?] {
+class SeetaConfSetting[D <: GenericObjectPool] extends GenericObjectPoolConfig[D] {
   /**
    * 评估器用的配置文件
    */
-  private var seetaModelSetting: SeetaModelSetting = null
+  private var SeetaModelSetting[D][D]: SeetaModelSetting[D][D] = null
 
-  def this(seetaModelSetting: SeetaModelSetting) ={
+  def this(SeetaModelSetting[D][D]: SeetaModelSetting[D][D]) ={
     this()
-    this.seetaModelSetting = seetaModelSetting
+    this.SeetaModelSetting[D][D] = SeetaModelSetting[D][D]
   }
 
   def this(id: Int, models: Array[String], dev: SeetaDevice) ={
     this()
-    this.seetaModelSetting = new SeetaModelSetting(id, models, dev)
+    this.SeetaModelSetting[D][D] = new SeetaModelSetting[D][D](id, models, dev)
   }
 
   def this(models: Array[String])= {
     this()
-    this.seetaModelSetting = new SeetaModelSetting(0, models, SeetaDevice.SEETA_DEVICE_AUTO)
+    this.SeetaModelSetting[D][D] = new SeetaModelSetting[D][D](0, models, SeetaDevice.SEETA_DEVICE_AUTO)
   }
 
   def this(model: String) ={
     this()
-    this.seetaModelSetting = new SeetaModelSetting(0, Array[String](model), SeetaDevice.SEETA_DEVICE_AUTO)
+    this.SeetaModelSetting[D] = new SeetaModelSetting[D](0, Array[String](model), SeetaDevice.SEETA_DEVICE_AUTO)
   }
 
-  def getSeetaModelSetting: SeetaModelSetting = seetaModelSetting
+  def getSeetaModelSetting[D]: SeetaModelSetting[D] = SeetaModelSetting[D]
 
-  def setSeetaModelSetting(seetaModelSetting: SeetaModelSetting): Unit = {
-    this.seetaModelSetting = seetaModelSetting
+  def setSeetaModelSetting[D](SeetaModelSetting[D]: SeetaModelSetting[D]): Unit = {
+    this.SeetaModelSetting[D] = SeetaModelSetting[D]
   }
 }

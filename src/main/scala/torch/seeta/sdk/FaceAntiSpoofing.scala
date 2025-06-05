@@ -13,7 +13,7 @@ object FaceAntiSpoofing {
     DETECTING //< 正在检测
 
     //< 正在检测
-  
+
 //  object Status extends Enumeration {
 //    type Status = Value
 //    val REAL, //< 真实人脸
@@ -24,13 +24,13 @@ object FaceAntiSpoofing {
 //  }
 }
 
-class FaceAntiSpoofing {
+class FaceAntiSpoofing[D] {
   //	static{
   //		System.loadLibrary("FaceAntiSpoofing600_java");
   //	}
   var impl = 0
 
-  def this(setting: SeetaModelSetting) ={
+  def this(setting: SeetaModelSetting[D]) ={
     this()
     this.construct(setting)
   }
@@ -45,7 +45,7 @@ class FaceAntiSpoofing {
     this.construct(model1, model2, device, id)
   }
 
-  @native private def construct(setting: SeetaModelSetting): Unit
+  @native private def construct(setting: SeetaModelSetting[D]): Unit
 
   @native private def construct(model: String, device: String, id: Int): Unit
 

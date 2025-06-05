@@ -28,7 +28,7 @@ class FaceAntiSpoofingPool(config: SeetaConfSetting) extends GenericObjectPool[F
      */
     @throws[Exception]
     override def makeObject: PooledObject[FaceAntiSpoofing] = {
-      val detector = new FaceAntiSpoofing(config.getSeetaModelSetting)
+      val detector = new FaceAntiSpoofing(config.getSeetaModelSetting[D][D])
       new DefaultPooledObject[FaceAntiSpoofing](detector)
     }
 
