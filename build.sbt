@@ -1,7 +1,7 @@
 
 lazy val root = (project in file("."))
   .settings(
-    name := "storch-seeta"
+    name := "storch-seeta-face"
   )
 
 import sbt.*
@@ -64,7 +64,7 @@ ThisBuild / tlSonatypeUseLegacyHost := false
 // publish website from this branch
 ThisBuild / tlSitePublishBranch := Some("master")
 ThisBuild / homepage := Some(new URL("https://storch.dev/api/"))
-ThisBuild / scmInfo := Some( ScmInfo( url( "https://github.com/mullerhai/storch-ods" ), "scm:git:https://github.com/mullerhai/storch-ods.git" ) )
+ThisBuild / scmInfo := Some( ScmInfo( url( "https://github.com/mullerhai/storch-seeta-face" ), "scm:git:https://github.com/mullerhai/storch-seeta-face.git" ) )
 // https://mvnrepository.com/artifact/org.projectlombok/lombok
 
 
@@ -89,3 +89,4 @@ ThisBuild  / assemblyMergeStrategy := {
 }
 // https://mvnrepository.com/artifact/org.apache.commons/commons-pool2
 libraryDependencies += "org.apache.commons" % "commons-pool2" % "2.12.1"
+
